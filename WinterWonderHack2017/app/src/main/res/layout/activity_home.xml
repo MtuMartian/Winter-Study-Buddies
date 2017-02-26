@@ -52,6 +52,13 @@
         android:layout_alignParentBottom="true"
         android:onClick="launchNeWPostingPage"></Button>
 
+    <ProgressBar
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        style="@android:style/Widget.ProgressBar.Large"/>
+
 </RelativeLayout>
 
     <!-- The navigation drawer -->

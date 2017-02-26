@@ -8,11 +8,11 @@ import java.util.Date;
 
 public class Message
 {
-    public Date time;
+    public String time;
     public String poster;
     public String text;
 
-    public Message(Date time, String poster, String text) {
+    public Message(String time, String poster, String text) {
         this.time = time;
         this.poster = poster;
         this.text = text;

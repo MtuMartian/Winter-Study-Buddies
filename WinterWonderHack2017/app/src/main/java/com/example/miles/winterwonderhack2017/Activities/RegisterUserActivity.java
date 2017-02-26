@@ -53,6 +53,7 @@ public class RegisterUserActivity extends AppCompatActivity
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("user_auth", response);
+                editor.putString("user_name", userNameField.getText().toString());
                 editor.commit();
                 System.out.println("COMMITED");
                 System.out.println("RETREIVING!!!: " + settings.getString("user_auth", ""));

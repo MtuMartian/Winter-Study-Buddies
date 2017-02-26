@@ -43,6 +43,7 @@
     <EditText
         android:id="@+id/message"
         android:hint="Write a message!"
+        android:textColor="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

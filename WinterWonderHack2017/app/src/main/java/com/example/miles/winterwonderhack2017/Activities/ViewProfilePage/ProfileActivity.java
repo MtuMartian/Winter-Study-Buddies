@@ -47,7 +47,10 @@ public class ProfileActivity extends BaseDrawerActivity
 
         setupDrawer();
 
-        username = "miles";// getIntent().getExtras().getString("username");
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+
+
+        username = settings.getString("user_name", "");
 
         nameText = (TextView) findViewById(R.id.nameText);
         emailText = (TextView) findViewById(R.id.emailText);

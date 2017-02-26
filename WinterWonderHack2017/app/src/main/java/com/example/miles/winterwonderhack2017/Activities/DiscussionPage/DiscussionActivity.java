@@ -53,9 +53,6 @@ public class DiscussionActivity extends BaseDrawerActivity
 
         messageListView = (ListView) findViewById(R.id.messageList);
         messages = new ArrayList();
-        messages.add(new Message(new Date(), "Baron", "Hello people!"));
-        messages.add(new Message(new Date(), "Miles", "Hi!"));
-        messages.add(new Message(new Date(), "Baron", "What is up?"));
         adapter = new MessageListAdapter(this, R.id.messageList, messages);
         messageListView.setAdapter(adapter);
     }
@@ -67,6 +64,24 @@ public class DiscussionActivity extends BaseDrawerActivity
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             public void onResponse(String response) {
+                try {
+                    messages = new ArrayList<Message>();
+                    JSONArray jArray = new JSONArray(response);
+                    for (int i = 0; i < jArray.length(); i++)
+                    {
+                        JSONObject jObj = (JSONObject) jArray.get(i);
+                        String username = jObj.getString("username");
+                        String comment = jObj.getString("comment");
+                        String time = jObj.getString("time");
+                        Message message = new Message(time, username, comment);
+                        messages.add(message);
+                    }
+                    adapter = new MessageListAdapter(getApplicationContext(), R.id.messageList, messages);
+                    messageListView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 System.out.println("GETTING RESPONSE FROM DISCUSSION!!!");
                 System.out.println(response);
             }
@@ -108,6 +123,7 @@ public class DiscussionActivity extends BaseDrawerActivity
             public void onResponse(String response) {
                 System.out.println("GETTING RESPONSE FROM POSTING MESSAGE!!!");
                 System.out.println(response);
+                getData();
             }
         }, new Response.ErrorListener() {
 

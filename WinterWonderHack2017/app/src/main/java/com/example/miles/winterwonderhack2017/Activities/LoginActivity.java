@@ -40,15 +40,13 @@ public class LoginActivity extends Activity
     private View screenBlocker;
     private ProgressBar loadingIndicator;
 
-    private Map<String, String> tempUserValidation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        /*Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
-        finish(); // Skips the login page if uncommented
+        finish(); // Skips the login page if uncommented*/
 
         SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         if (settings.contains("user_auth"))
@@ -102,11 +100,6 @@ public class LoginActivity extends Activity
         usernameField = (EditText) findViewById(R.id.userNameField);
         passwordField = (EditText) findViewById(R.id.passwordField);
         errorMessageField = (TextView) findViewById(R.id.errorMessage);
-
-        tempUserValidation = new HashMap<>();
-        tempUserValidation.put("miles", "Password");
-        tempUserValidation.put("baron", "LongerPassword");
-
     }
 
     public void loginButtonPressed(View v)
@@ -121,6 +114,7 @@ public class LoginActivity extends Activity
                 SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("user_auth", response);
+                editor.putString("user_name", usernameField.getText().toString());
                 editor.commit();
                 Intent homePageLauncher = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(homePageLauncher);
