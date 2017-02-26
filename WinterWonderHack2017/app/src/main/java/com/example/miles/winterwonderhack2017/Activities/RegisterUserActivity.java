@@ -1,6 +1,7 @@
 package com.example.miles.winterwonderhack2017.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.miles.winterwonderhack2017.Activities.HomePage.HomeActivity;
 import com.example.miles.winterwonderhack2017.R;
 
 import java.io.FileNotFoundException;
@@ -54,6 +56,9 @@ public class RegisterUserActivity extends AppCompatActivity
                 editor.commit();
                 System.out.println("COMMITED");
                 System.out.println("RETREIVING!!!: " + settings.getString("user_auth", ""));
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(intent);
+                finish();
             }
         }, new Response.ErrorListener() {
 

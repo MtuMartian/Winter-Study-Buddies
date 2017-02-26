@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -28,11 +29,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.prefs.Preferences;
 
+import static android.view.View.INVISIBLE;
+
 public class LoginActivity extends Activity
 {
     private EditText usernameField;
     private EditText passwordField;
     private TextView errorMessageField;
+
+    private View screenBlocker;
+    private ProgressBar loadingIndicator;
 
     private Map<String, String> tempUserValidation;
 
@@ -40,6 +46,10 @@ public class LoginActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
+        finish(); // Skips the login page if uncommented
+
         SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         if (settings.contains("user_auth"))
         {
@@ -55,7 +65,6 @@ public class LoginActivity extends Activity
                 {
                     if (Integer.parseInt(res) == 0)
                     {
-                        // Create a loading indicator and deactivate it here
                         return;
                     }
                     Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -65,7 +74,6 @@ public class LoginActivity extends Activity
             }, new Response.ErrorListener() {
 
                 public void onErrorResponse(VolleyError error) {
-
                     System.out.println("RESPONSE FAILED");
                 }
             })
@@ -103,9 +111,6 @@ public class LoginActivity extends Activity
 
     public void loginButtonPressed(View v)
     {
-        String user = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://198.211.114.218:8787/api/login";
 
@@ -119,6 +124,7 @@ public class LoginActivity extends Activity
                 editor.commit();
                 Intent homePageLauncher = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(homePageLauncher);
+                finish();
             }
         }, new Response.ErrorListener() {
 
@@ -155,38 +161,6 @@ public class LoginActivity extends Activity
     {
         Intent intent = new Intent(this, RegisterUserActivity.class);
         startActivity(intent);
-    }
-
-    private class ValidateLoginTask extends AsyncTask<String, Void, Boolean>
-    {
-        @Override
-        protected Boolean doInBackground(String... params) {
-            /*try {
-                Thread.sleep(3000);
-                if (!tempUserValidation.containsKey(params[0].toLowerCase()))
-                    return false;
-                if (tempUserValidation.get(params[0].toLowerCase()).equals(params[1]))
-                    return true;
-                return false;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                return false;
-            }*/
-            return true;
-        }
-
-        protected void onPostExecute(Boolean result)
-        {
-            if (result)
-            {
-                Intent homePageLauncher = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(homePageLauncher);
-            }
-            else
-            {
-                passwordField.setText("");
-                errorMessageField.setVisibility(View.VISIBLE);
-            }
-        }
+        finish();
     }
 }

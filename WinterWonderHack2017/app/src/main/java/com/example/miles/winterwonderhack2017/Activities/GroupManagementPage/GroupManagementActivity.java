@@ -1,10 +1,9 @@
 package com.example.miles.winterwonderhack2017.Activities.GroupManagementPage;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.miles.winterwonderhack2017.Activities.Models.User;
+import com.example.miles.winterwonderhack2017.Activities.Data.User;
 import com.example.miles.winterwonderhack2017.Activities.NavigationBar.BaseDrawerActivity;
 import com.example.miles.winterwonderhack2017.R;
 

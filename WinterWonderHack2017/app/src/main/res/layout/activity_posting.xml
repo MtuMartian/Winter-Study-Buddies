@@ -26,6 +26,7 @@
                 android:src="@drawable/ic_action_name"/>
 
             <ImageView
+                android:onClick="profileClicked"
                 android:layout_marginRight="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -36,17 +37,36 @@
 
         <TextView
             android:text="TITLE"
+            android:textSize="24dp"
             android:id="@+id/title"
             android:textColor="#FFFFFF"
             android:layout_below="@+id/navWrapper"
-            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/classText"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/title"/>
+
+        <TextView
+            android:id="@+id/userText"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/classText"/>
 
         <TextView
             android:text="DESCRIPTION"
             android:id="@+id/description"
+            android:layout_margin="16dp"
             android:textColor="#FFFFFF"
-            android:layout_below="@+id/title"
+            android:layout_below="@+id/userText"
             android:layout_above="@+id/entryButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -97,20 +117,11 @@
                     android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rishabh"
+                    android:text="Study Buddies"
                     android:textColor="#fff"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_marginTop="4dp"
-                    android:text="View Profile"
-                    android:textColor="#fff"
-                    android:textSize="12sp" />
             </LinearLayout>
         </RelativeLayout>
 
